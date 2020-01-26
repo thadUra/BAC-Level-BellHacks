@@ -1,6 +1,19 @@
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+
 public class Timer {
     private double gramsAlch; 
     private double bac;
+
+    public static ActionListener beerpressed = new ActionListener() {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Add code to 
+        }
+    };
  
     //private ArrayList<Drinks> drink;
     public Timer() {
