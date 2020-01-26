@@ -1,7 +1,3 @@
-import Alcohol.java;
-import GUI.java;
-import Drink.java;
-
 public class main {
     public static void main (String[] a) {
         GUI.initialize();
