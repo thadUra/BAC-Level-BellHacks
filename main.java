@@ -1,8 +1,9 @@
 public class main {
     public static void main (String[] a) {
-        //GUI.initialize();
+        GUI.initialize();
         // Test initialization
-        Alcohol user = new Alcohol("me", "male", 175, 155);
+        Alcohol user = GUI.currentProfile;
+        
         System.out.println(user.getName());
         // Main screen 
         // Initilializing drink categories 

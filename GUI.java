@@ -115,17 +115,8 @@ public class GUI {
                 System.out.println(currentProfile.getWeight());
             }
         });
-        
-
-        while (true) {
-            
-            if (pressed == true) {
-                System.out.println("We Got Here");
-                pressed = false;
-                
-            }
-        }
     }
+    
     public static void setProfileScreen() {
         frame.setLayout(new GridLayout(5, 1));
         nameT.setMinimumSize(new Dimension(200, 100));

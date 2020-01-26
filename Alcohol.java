@@ -1,4 +1,4 @@
-class Alcohol {
+public class Alcohol {
     // Instance variables
     private String name;
     private String gender;
