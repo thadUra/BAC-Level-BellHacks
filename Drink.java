@@ -1,14 +1,14 @@
 class Drink {
-    private int percent;
+    private double percent;
     private String category;
 
-    public Drink( int percent, String category ) {
+    public Drink( double percent, String category ) {
         this.percent = percent;
         this.category = category;
     }
 
-    public int getPercent() {
-        return percent;
+    public double getPercent() {
+        return percent/100;
     }
     public String getCategory() {
         return category;

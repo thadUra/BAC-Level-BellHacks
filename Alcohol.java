@@ -10,7 +10,6 @@ class Alcohol {
         this.gender = gender;
         this.height = height;
         this.weight = weight;
-        Timer(gender, height, weight);
     }
 
     public String getName() {
