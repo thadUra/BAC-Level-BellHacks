@@ -75,17 +75,18 @@ public class GUI {
                 changeMade = true;
             }
         });
-
-        frame.setLayout(new BoxLayout(frame, 1));
-        nameT.setFont(f);
-        panelProfile.add(nameT);
-        nameT.setEnabled(true);
-        panelProfile.add(genderT);
-        genderT.setFont(f);
+        frame.setLayout(new GridLayout(5, 1));
+        nameT.setMinimumSize(new Dimension(200, 100));
+        genderT.setMinimumSize(new Dimension(200, 100));
         frame.add(nameT);
         frame.add(genderT);
+        frame.add(weightT);
+        frame.add(heightT);
+        frame.add(sendData);
         
-
+        
+        
+        frame.setEnabled(true);
         sendData.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -93,7 +94,16 @@ public class GUI {
             }
         });
         
-        currentProfile = profileScreen();
+        while (true) {
+            if (pressed) {
+                pressed = false;
+                currentProfile = getProfile();
+                System.out.println(currentProfile.getName());
+                System.out.println(currentProfile.getGender());
+                System.out.println(currentProfile.getHeight());
+                System.out.println(currentProfile.getWeight());
+            }
+        }
     }
 
     public static Thread thread = new Thread(new Runnable() {
@@ -108,7 +118,7 @@ public class GUI {
                             frame.remove(panelDrink);
                             frame.remove(panelTime);
                             frame.add(panelProfile);
-                            currentProfile = profileScreen();
+                            
                         break;
                     }
                 }
@@ -117,10 +127,7 @@ public class GUI {
         }
     });
     public static boolean pressed = false;
-    public static Alcohol profileScreen() {
-        while (!pressed) {
-
-        }
+    public static Alcohol getProfile() {
         String temp;
         if (genderT.getSelectedIndex() == 0) temp = "Male";
         else temp = "Female";
