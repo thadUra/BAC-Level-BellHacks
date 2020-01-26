@@ -15,7 +15,7 @@ public class GUI {
     public static JMenu drinkM, profileM, timerM;
     public static JMenuItem drinkMI, profileMI, timerMI;
 
-    public static JTextArea nameT, heightT, weightT;
+    public static JTextArea nameT, heightT, weightT, timerArea;
     public static JComboBox<String> genderT;
     public static JButton sendData;
 
@@ -41,6 +41,9 @@ public class GUI {
         genderT = new JComboBox<String>(genders);
         sendData = new JButton("Send Data");
         sendData.setFont(f);
+
+        timerArea = new JTextArea();
+        timerArea.setFont(f);
         
 
         menuBar = new JMenuBar();
@@ -75,6 +78,10 @@ public class GUI {
                 changeMade = true;
             }
         });
+
+        
+        
+        
         frame.setLayout(new GridLayout(5, 1));
         nameT.setMinimumSize(new Dimension(200, 100));
         genderT.setMinimumSize(new Dimension(200, 100));
@@ -83,10 +90,9 @@ public class GUI {
         frame.add(weightT);
         frame.add(heightT);
         frame.add(sendData);
-        
-        
-        
         frame.setEnabled(true);
+
+        
         sendData.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -105,20 +111,34 @@ public class GUI {
             }
         }
     }
-
+    public static void setProfileScreen() {
+        frame.setLayout(new GridLayout(5, 1));
+        nameT.setMinimumSize(new Dimension(200, 100));
+        genderT.setMinimumSize(new Dimension(200, 100));
+        frame.add(nameT);
+        frame.add(genderT);
+        frame.add(weightT);
+        frame.add(heightT);
+        frame.add(sendData);
+    }
+    public static void setDrinkScreen() {
+        frame.setLayout(new GridLayout(2, 3));
+        frame.remove(nameT);
+        frame.remove(genderT);
+        frame.remove(weightT);
+        frame.remove(heightT);
+        frame.remove(sendData);
+    }
     public static Thread thread = new Thread(new Runnable() {
         @Override
         public void run() {
-            frame.add(panelProfile);
+            setProfileScreen();
             
             while (true) {
                 if (changeMade) {
                     switch(screen) {
                         case 0:
-                            frame.remove(panelDrink);
-                            frame.remove(panelTime);
-                            frame.add(panelProfile);
-                            
+                            setProfileScreen();
                         break;
                     }
                 }
