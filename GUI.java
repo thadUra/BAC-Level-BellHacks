@@ -43,7 +43,7 @@ public class GUI {
         sendData.setFont(f);
         currentProfile = null;
 
-        timerArea = new JTextArea();
+        timerArea = new JTextArea("Timer");
         timerArea.setFont(f);
 
         beerB = new JButton("Beer");
@@ -84,8 +84,7 @@ public class GUI {
         profileMI.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                screen = 0;
-                changeMade = true;
+                setProfileScreen();
                 System.out.println("We Got Here");
             }
         });
@@ -93,16 +92,15 @@ public class GUI {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                screen = 1;
-                changeMade = true;
                 System.out.println("We Got Here");
+                setTimerScreen();
 
             }
 
         });
 
         setProfileScreen();
-        // thread.start();
+        
 
         sendData.addActionListener(new ActionListener() {
             @Override
@@ -123,6 +121,7 @@ public class GUI {
         }
         System.out.println("We got here");
     }
+    
     
     public static void setProfileScreen() {
         frame.setLayout(new GridLayout(5, 1));
@@ -154,34 +153,24 @@ public class GUI {
 
     }
     public static void setTimerScreen() {
-        frame.setLayout(new GridLayout(1, 1));
+        
         frame.remove(nameT);
         frame.remove(genderT);
         frame.remove(weightT);
         frame.remove(heightT);
         frame.remove(sendData);
-        frame.remove(timerArea);
-    }
-    public static Thread thread = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            setProfileScreen();
-            
-            while (true) {
-                if (changeMade) {
-                    switch(screen) {
-                        case 0:
-                            setProfileScreen();
-                        break;
-                        case 1:
-                            setDrinkScreen();
-                        break;
-                    }
-                }
+        frame.remove(beerB);
+        frame.remove(wineB);
+        frame.remove(liquorB);
+        frame.remove(countA);
+        frame.setLayout(new GridLayout(1, 1));
+        frame.add(timerArea);
+        frame.revalidate();
+        frame.setEnabled(true);
+        frame.setVisible(true);
 
-            }
-        }
-    });
+    }
+    
     public static boolean pressed = false;
     public static Alcohol getProfile() {
         String temp;
