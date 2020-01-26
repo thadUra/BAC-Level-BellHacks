@@ -15,7 +15,7 @@ public class GUI {
     public static JMenu drinkM, profileM, timerM;
     public static JMenuItem drinkMI, profileMI, timerMI;
 
-    public static JTextArea nameT, heightT, weightT;
+    public static JTextArea nameT, heightT, weightT, timerArea;
     public static JComboBox<String> genderT;
     public static JButton sendData;
 
@@ -41,6 +41,9 @@ public class GUI {
         genderT = new JComboBox<String>(genders);
         sendData = new JButton("Send Data");
         sendData.setFont(f);
+
+        timerArea = new JTextArea();
+        timerArea.setFont(f);
         
 
         menuBar = new JMenuBar();
