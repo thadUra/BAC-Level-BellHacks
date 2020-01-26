@@ -15,13 +15,13 @@ public class GUI {
     public static JMenu drinkM, profileM, timerM;
     public static JMenuItem drinkMI, profileMI, timerMI;
 
-    public static JTextArea nameT, heightT, weightT, timerArea;
+    public static JTextArea nameT, heightT, weightT, timerArea, countA;
     public static JComboBox<String> genderT;
-    public static JButton sendData;
-
-    public static boolean changeMade;
+    public static JButton sendData, beerB, wineB, liquorB, blank;
 
     public static Alcohol currentProfile;
+
+    public static boolean changeMade;
 
     public static Font f = new Font(Font.SANS_SERIF, 15, 15);
 
@@ -37,20 +37,30 @@ public class GUI {
         nameT.setText("Insert Name");
         heightT = new JTextArea("Insert Height");
         weightT = new JTextArea("Insert Weight");
-        String[] genders = {"Male", "Female"};
+        String[] genders = { "Male", "Female" };
         genderT = new JComboBox<String>(genders);
         sendData = new JButton("Send Data");
         sendData.setFont(f);
+        currentProfile = null;
 
         timerArea = new JTextArea();
         timerArea.setFont(f);
-        
+
+        beerB = new JButton("Beer");
+        wineB = new JButton("Wine");
+        liquorB = new JButton("Hard Liquor");
+        beerB.setFont(f);
+        wineB.setFont(f);
+        liquorB.setFont(f);
+        blank = new JButton();
+        countA = new JTextArea("Add drink count here");
+        countA.setFont(f);
 
         menuBar = new JMenuBar();
         menuBar.setFont(f);
         menuBar.setEnabled(true);
         menuBar.setVisible(true);
-        
+
         drinkM = new JMenu("Add Drink");
         drinkM.setFont(f);
         profileM = new JMenu("Profile");
@@ -76,38 +86,43 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 screen = 0;
                 changeMade = true;
+                System.out.println("We Got Here");
             }
         });
+        timerMI.addActionListener(new ActionListener() {
 
-        
-        
-        
-        frame.setLayout(new GridLayout(5, 1));
-        nameT.setMinimumSize(new Dimension(200, 100));
-        genderT.setMinimumSize(new Dimension(200, 100));
-        frame.add(nameT);
-        frame.add(genderT);
-        frame.add(weightT);
-        frame.add(heightT);
-        frame.add(sendData);
-        frame.setEnabled(true);
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                screen = 1;
+                changeMade = true;
+                System.out.println("We Got Here");
 
-        
+            }
+
+        });
+
+        setProfileScreen();
+        // thread.start();
+
         sendData.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pressed = true;
-            }
-        });
-        
-        while (true) {
-            if (pressed) {
-                pressed = false;
+                System.out.println("We Got Here");
                 currentProfile = getProfile();
                 System.out.println(currentProfile.getName());
                 System.out.println(currentProfile.getGender());
                 System.out.println(currentProfile.getHeight());
                 System.out.println(currentProfile.getWeight());
+            }
+        });
+        
+
+        while (true) {
+            
+            if (pressed == true) {
+                System.out.println("We Got Here");
+                pressed = false;
+                
             }
         }
     }
@@ -115,6 +130,11 @@ public class GUI {
         frame.setLayout(new GridLayout(5, 1));
         nameT.setMinimumSize(new Dimension(200, 100));
         genderT.setMinimumSize(new Dimension(200, 100));
+        frame.remove(timerArea);
+        frame.remove(beerB);
+        frame.remove(wineB);
+        frame.remove(liquorB);
+        frame.remove(countA);
         frame.add(nameT);
         frame.add(genderT);
         frame.add(weightT);
@@ -128,6 +148,21 @@ public class GUI {
         frame.remove(weightT);
         frame.remove(heightT);
         frame.remove(sendData);
+        
+        frame.add(beerB);
+        frame.add(wineB);
+        frame.add(liquorB);
+        frame.add(countA);
+
+    }
+    public static void setTimerScreen() {
+        frame.setLayout(new GridLayout(1, 1));
+        frame.remove(nameT);
+        frame.remove(genderT);
+        frame.remove(weightT);
+        frame.remove(heightT);
+        frame.remove(sendData);
+        frame.remove(timerArea);
     }
     public static Thread thread = new Thread(new Runnable() {
         @Override
@@ -140,6 +175,9 @@ public class GUI {
                         case 0:
                             setProfileScreen();
                         break;
+                        case 1:
+                            setDrinkScreen();
+                        break;
                     }
                 }
 
@@ -151,7 +189,12 @@ public class GUI {
         String temp;
         if (genderT.getSelectedIndex() == 0) temp = "Male";
         else temp = "Female";
-        Alcohol profile = new Alcohol(nameT.getText(), temp, Double.parseDouble(heightT.getText()), Integer.parseInt(weightT.getText()));
+        Alcohol profile = null;
+        try {
+        profile = new Alcohol(nameT.getText(), temp, Double.parseDouble(heightT.getText()), Integer.parseInt(weightT.getText()));
+        } catch(NumberFormatException e)  {
+            e.printStackTrace();
+        }
         return profile;
     }
 
