@@ -1,3 +1,5 @@
+import java.util.concurrent.TimeUnit;
+
 public class Timer {
     private double gramsAlch; 
     private double bac;
@@ -35,29 +37,21 @@ public class Timer {
         return bac;
     }
 
-    public double calculateTime() {
+    public int calculateTime() throws InterruptedException {
         //Percent of BAC broken down per second
         double breakDown = .015 / 3600;
-        double timeTilSafe = ((bac - .08)/ .015) * 3600;
-        return bac;
-    }
-    /**public static Thread counddown = new Thread(new Runnable() {
-    public static safeTime = 0;
-		@Override
-		public void run() {
-            safeTime = calculateTime();
-            while (true) {
-                safetime--;
-                try {
-                    Thread.sleep(1000);
-                } 
-                catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+        int timeTilSafe = (int)(((bac - .08)/ .015) * 3600);
+        for(int i = timeTilSafe; i > 0; i--) {
+            System.out.println(i);
+            try {
+                TimeUnit.SECONDS.sleep(1);
             }
-            
-			
-		}
-    });*/
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            bac -= breakDown;
+            System.out.println("Current BAC is " + bac);
+        }
+        return 0;
+    }
 }
