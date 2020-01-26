@@ -79,6 +79,7 @@ public class GUI {
         
         
         
+        setProfileScreen();
         
         frame.setEnabled(true);
         sendData.addActionListener(new ActionListener() {
