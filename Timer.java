@@ -1,22 +1,28 @@
-class Timer {
+public class Timer {
     private double gramsAlch; 
     private double bac;
+ 
     //private ArrayList<Drinks> drink;
-    
     public Timer() {
 
     }
 
-    public void calculateGrams( double drinks ) {
-        gramsAlch = drinks * 14;
+    public void addDrinks( Drink drink, double ounces ) {
+        double percentAlch = drink.getPercent();
+        double alchAmt = percentAlch * ounces;
+        gramsAlch = alchAmt * 28.3495;
+
 
     }
     
-    public void calculateBAC(Alcohol a) {
+    public double calculateBAC(Alcohol a) {
+        
         //Transfer weight from lb to kg
         double weight = a.getWeight() * 0.453592;
+        
         //Transfer height from cm to m
         double height = a.getHeight() * .01;
+       
         //Calculate alcohol distribution based on male or female (these are constants)
         double malVolDist = 1.0178 - ((.012127 * weight) / (Math. pow(height, 2)));
         double femVolDist = .8736 - ((.012127 * weight) / (Math. pow(height, 2)));
@@ -26,6 +32,7 @@ class Timer {
         else {
             bac += (gramsAlch / ((weight *1000) * femVolDist)) * 100;
         }
+        return bac;
     }
 
     public double calculateTime() {
