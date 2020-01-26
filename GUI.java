@@ -75,14 +75,8 @@ public class GUI {
                 changeMade = true;
             }
         });
-        frame.setLayout(new GridLayout(5, 1));
-        nameT.setMinimumSize(new Dimension(200, 100));
-        genderT.setMinimumSize(new Dimension(200, 100));
-        frame.add(nameT);
-        frame.add(genderT);
-        frame.add(weightT);
-        frame.add(heightT);
-        frame.add(sendData);
+
+        
         
         
         
@@ -105,20 +99,34 @@ public class GUI {
             }
         }
     }
-
+    public static void setProfileScreen() {
+        frame.setLayout(new GridLayout(5, 1));
+        nameT.setMinimumSize(new Dimension(200, 100));
+        genderT.setMinimumSize(new Dimension(200, 100));
+        frame.add(nameT);
+        frame.add(genderT);
+        frame.add(weightT);
+        frame.add(heightT);
+        frame.add(sendData);
+    }
+    public static void setDrinkScreen() {
+        frame.setLayout(new GridLayout(2, 3));
+        frame.remove(nameT);
+        frame.remove(genderT);
+        frame.remove(weightT);
+        frame.remove(heightT);
+        frame.remove(sendData);
+    }
     public static Thread thread = new Thread(new Runnable() {
         @Override
         public void run() {
-            frame.add(panelProfile);
+            setProfileScreen();
             
             while (true) {
                 if (changeMade) {
                     switch(screen) {
                         case 0:
-                            frame.remove(panelDrink);
-                            frame.remove(panelTime);
-                            frame.add(panelProfile);
-                            
+                            setProfileScreen();
                         break;
                     }
                 }
