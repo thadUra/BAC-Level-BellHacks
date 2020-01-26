@@ -115,6 +115,13 @@ public class GUI {
                 System.out.println(currentProfile.getWeight());
             }
         });
+
+
+        while (true) {
+            System.out.println("We got here");
+            if (!(currentProfile == null)) break;
+        }
+        System.out.println("We got here");
     }
     
     public static void setProfileScreen() {
