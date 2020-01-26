@@ -79,9 +79,17 @@ public class GUI {
         
         
         
-        setProfileScreen();
-        
+        frame.setLayout(new GridLayout(5, 1));
+        nameT.setMinimumSize(new Dimension(200, 100));
+        genderT.setMinimumSize(new Dimension(200, 100));
+        frame.add(nameT);
+        frame.add(genderT);
+        frame.add(weightT);
+        frame.add(heightT);
+        frame.add(sendData);
         frame.setEnabled(true);
+
+        
         sendData.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
