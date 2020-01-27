@@ -43,7 +43,7 @@ public class GUI {
         sendData.setFont(f);
         currentProfile = null;
 
-        timerArea = new JTextArea();
+        timerArea = new JTextArea("Timer");
         timerArea.setFont(f);
 
         beerB = new JButton("Beer");
@@ -84,25 +84,32 @@ public class GUI {
         profileMI.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                screen = 0;
-                changeMade = true;
+                setProfileScreen();
                 System.out.println("We Got Here");
             }
+        });
+        drinkMI.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setDrinkScreen();
+
+            }
+            
         });
         timerMI.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                screen = 1;
-                changeMade = true;
                 System.out.println("We Got Here");
+                setTimerScreen();
 
             }
 
         });
 
         setProfileScreen();
-        // thread.start();
+        
 
         sendData.addActionListener(new ActionListener() {
             @Override
@@ -124,6 +131,7 @@ public class GUI {
         System.out.println("We got here");
     }
     
+    
     public static void setProfileScreen() {
         frame.setLayout(new GridLayout(5, 1));
         nameT.setMinimumSize(new Dimension(200, 100));
@@ -133,25 +141,41 @@ public class GUI {
         frame.remove(wineB);
         frame.remove(liquorB);
         frame.remove(countA);
+        frame.remove(blank);
+        frame.remove(timerArea);
+        frame.setLayout(new GridLayout(5, 1));
         frame.add(nameT);
         frame.add(genderT);
         frame.add(weightT);
         frame.add(heightT);
         frame.add(sendData);
+
+        frame.revalidate();
+        frame.setEnabled(true);
+        frame.setVisible(true);
     }
     public static void setDrinkScreen() {
-        frame.setLayout(new GridLayout(2, 3));
+        frame.setLayout(new GridLayout(3, 2));
         frame.remove(nameT);
         frame.remove(genderT);
         frame.remove(weightT);
         frame.remove(heightT);
         frame.remove(sendData);
-        
+        frame.remove(countA);
+        frame.remove(timerArea);
+        frame.setLayout(new GridLayout(2, 3));
         frame.add(beerB);
         frame.add(wineB);
         frame.add(liquorB);
+        frame.add(blank);
+        
         frame.add(countA);
+        
+        
 
+        frame.revalidate();
+        frame.setEnabled(true);
+        frame.setVisible(true);
     }
     public static void setTimerScreen() {
         frame.setLayout(new GridLayout(1, 1));
@@ -160,28 +184,19 @@ public class GUI {
         frame.remove(weightT);
         frame.remove(heightT);
         frame.remove(sendData);
-        frame.remove(timerArea);
-    }
-    public static Thread thread = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            setProfileScreen();
-            
-            while (true) {
-                if (changeMade) {
-                    switch(screen) {
-                        case 0:
-                            setProfileScreen();
-                        break;
-                        case 1:
-                            setDrinkScreen();
-                        break;
-                    }
-                }
+        frame.remove(beerB);
+        frame.remove(wineB);
+        frame.remove(liquorB);
+        frame.remove(countA);
+        frame.remove(blank);
+        frame.setLayout(new GridLayout(1, 1));
+        frame.add(timerArea);
+        frame.revalidate();
+        frame.setEnabled(true);
+        frame.setVisible(true);
 
-            }
-        }
-    });
+    }
+    
     public static boolean pressed = false;
     public static Alcohol getProfile() {
         String temp;

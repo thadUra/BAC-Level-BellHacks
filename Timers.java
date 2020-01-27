@@ -1,11 +1,17 @@
 import java.util.concurrent.TimeUnit;
+import javax.swing.*;
 
-public class Timer {
+public class Timers {
+    public static int timetillsafeG;
+    
+    
+	
+    
     private double gramsAlch; 
     private double bac;
  
     //private ArrayList<Drinks> drink;
-    public Timer() {
+    public Timers() {
 
     }
 
@@ -37,12 +43,20 @@ public class Timer {
         return bac;
     }
 
+    
+
+
     public int calculateTime() throws InterruptedException {
         //Percent of BAC broken down per second
+        bac = bac%.3f;
         double breakDown = .015 / 3600;
         int timeTilSafe = (int)(((bac - .08)/ .015) * 3600);
         for(int i = timeTilSafe; i > 0; i--) {
-            System.out.println("\n" + "There are " + i + " seconds left");
+            
+            GUI.timerArea.setText(Integer.toString(i));
+
+            System.out.println(i);
+            
             try {
                 TimeUnit.SECONDS.sleep(1);
             }
@@ -50,8 +64,7 @@ public class Timer {
                 e.printStackTrace();
             }
             bac -= breakDown;
-            System.out.println("The current BAC is ");
-            System.out.format("%.4f", bac);
+            System.out.println("Current BAC is " + bac);
         }
         return 0;
     }
