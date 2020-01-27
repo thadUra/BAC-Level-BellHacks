@@ -127,7 +127,6 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 test.time.addDrinks(test.beer, Integer.parseInt(countA.getText()));
-
             }
 
         });
