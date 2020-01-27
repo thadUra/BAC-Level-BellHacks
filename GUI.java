@@ -122,6 +122,14 @@ public class GUI {
                 System.out.println(currentProfile.getWeight());
             }
         });
+        beerB.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                test.time.addDrinks(test.beer, Integer.parseInt(countA.getText()));
+            }
+
+        });
 
 
         while (true) {

@@ -1,4 +1,10 @@
 public class test {
+    public static Timers time = new Timers();
+    public static final  Drink beer = new Drink(5, "Beer");
+    public static final Drink wine = new Drink(12, "Wine");
+    public static final Drink liquor = new Drink(40, "Hard Liquor");
+
+
     public static void main (String[] a) {
         GUI.initialize();
         // Test initialization
@@ -7,10 +13,8 @@ public class test {
         System.out.println(user.getName());
         // Main screen 
         // Initilializing drink categories 
-        Drink beer = new Drink(5, "Beer");
-        Drink wine = new Drink(12, "Wine");
-        Drink liquor = new Drink(40, "Hard Liquor");
-        Timers time = new Timers();
+       
+        
         time.addDrinks(beer, 48);
         System.out.println(time.calculateBAC(user));
         try {
