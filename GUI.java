@@ -88,6 +88,15 @@ public class GUI {
                 System.out.println("We Got Here");
             }
         });
+        drinkMI.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setDrinkScreen();
+
+            }
+            
+        });
         timerMI.addActionListener(new ActionListener() {
 
             @Override
@@ -132,28 +141,44 @@ public class GUI {
         frame.remove(wineB);
         frame.remove(liquorB);
         frame.remove(countA);
+        frame.remove(blank);
+        frame.remove(timerArea);
+        frame.setLayout(new GridLayout(5, 1));
         frame.add(nameT);
         frame.add(genderT);
         frame.add(weightT);
         frame.add(heightT);
         frame.add(sendData);
+
+        frame.revalidate();
+        frame.setEnabled(true);
+        frame.setVisible(true);
     }
     public static void setDrinkScreen() {
-        frame.setLayout(new GridLayout(2, 3));
+        frame.setLayout(new GridLayout(3, 2));
         frame.remove(nameT);
         frame.remove(genderT);
         frame.remove(weightT);
         frame.remove(heightT);
         frame.remove(sendData);
-        
+        frame.remove(countA);
+        frame.remove(timerArea);
+        frame.setLayout(new GridLayout(2, 3));
         frame.add(beerB);
         frame.add(wineB);
         frame.add(liquorB);
+        frame.add(blank);
+        
         frame.add(countA);
+        
+        
 
+        frame.revalidate();
+        frame.setEnabled(true);
+        frame.setVisible(true);
     }
     public static void setTimerScreen() {
-        
+        frame.setLayout(new GridLayout(1, 1));
         frame.remove(nameT);
         frame.remove(genderT);
         frame.remove(weightT);
@@ -163,6 +188,7 @@ public class GUI {
         frame.remove(wineB);
         frame.remove(liquorB);
         frame.remove(countA);
+        frame.remove(blank);
         frame.setLayout(new GridLayout(1, 1));
         frame.add(timerArea);
         frame.revalidate();
