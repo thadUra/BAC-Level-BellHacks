@@ -1,14 +1,9 @@
 import java.util.concurrent.TimeUnit;
-import javax.swing.*;
 
 public class Timers {
-    public static int timetillsafeG;
-    
-    
-	
-    
     private double gramsAlch; 
     private double bac;
+    private int timeTilSafe;
  
     //private ArrayList<Drinks> drink;
     public Timers() {
@@ -23,7 +18,7 @@ public class Timers {
 
     }
     
-    public double calculateBAC(Alcohol a) {
+    public void calculateBAC(Alcohol a) {
         
         //Transfer weight from lb to kg
         double weight = a.getWeight() * 0.453592;
@@ -40,23 +35,19 @@ public class Timers {
         else {
             bac += (gramsAlch / ((weight *1000) * femVolDist)) * 100;
         }
-        return bac;
     }
-
-    
-
 
     public int calculateTime() throws InterruptedException {
         //Percent of BAC broken down per second
-        bac = bac%.3f;
         double breakDown = .015 / 3600;
-        int timeTilSafe = (int)(((bac - .08)/ .015) * 3600);
+        timeTilSafe = (int)(((bac - .08)/ .015) * 3600);
+        if (timeTilSafe <= 0) {
+            return 0;
+        }
         for(int i = timeTilSafe; i > 0; i--) {
-            
+            timeTilSafe = i;
             GUI.timerArea.setText(Integer.toString(i));
-
-            System.out.println(i);
-            
+            System.out.println("\n" + "There are " + i + " seconds left");
             try {
                 TimeUnit.SECONDS.sleep(1);
             }
@@ -64,7 +55,8 @@ public class Timers {
                 e.printStackTrace();
             }
             bac -= breakDown;
-            System.out.println("Current BAC is " + bac);
+            System.out.println("The current BAC is ");
+            System.out.format("%.4f", bac);
         }
         return 0;
     }

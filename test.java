@@ -16,7 +16,7 @@ public class test {
        
         
         time.addDrinks(beer, 48);
-        System.out.println(time.calculateBAC(user));
+        
         try {
 			System.out.println(time.calculateTime());
 		} catch (InterruptedException e) {

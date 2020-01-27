@@ -95,7 +95,7 @@ public class GUI {
                 setDrinkScreen();
 
             }
-            
+
         });
         timerMI.addActionListener(new ActionListener() {
 
@@ -109,7 +109,6 @@ public class GUI {
         });
 
         setProfileScreen();
-        
 
         sendData.addActionListener(new ActionListener() {
             @Override
@@ -122,11 +121,40 @@ public class GUI {
                 System.out.println(currentProfile.getWeight());
             }
         });
+
         beerB.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 test.time.addDrinks(test.beer, Integer.parseInt(countA.getText()));
+                test.time.calculateBAC(currentProfile);
+                changeMade = true;
+                remakeThread();
+                counThread.start();
+            }
+
+        });
+        wineB.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                test.time.addDrinks(test.wine, Integer.parseInt(countA.getText()));
+                test.time.calculateBAC(currentProfile);
+                changeMade = true;
+                remakeThread();
+                counThread.start();
+            }
+
+        });
+        liquorB.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                test.time.addDrinks(test.liquor, Integer.parseInt(countA.getText()));
+                test.time.calculateBAC(currentProfile);
+                changeMade = true;
+                remakeThread();
+                counThread.start();
             }
 
         });
@@ -137,20 +165,56 @@ public class GUI {
             if (!(currentProfile == null)) break;
         }
         System.out.println("We got here");
+
+
     }
+    public static Thread counThread = new Thread(new Runnable() {
+
+        @Override
+        public void run() {
+            try {
+                test.time.calculateTime();
+            } catch (InterruptedException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+
+        }
+
+    });
+    public static void remakeThread() {
+        counThread.stop();
+        counThread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    test.time.calculateTime();
+                } catch (InterruptedException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
     
+            }
+    
+        });
+    }
     
     public static void setProfileScreen() {
         frame.setLayout(new GridLayout(5, 1));
-        nameT.setMinimumSize(new Dimension(200, 100));
-        genderT.setMinimumSize(new Dimension(200, 100));
+        
         frame.remove(timerArea);
         frame.remove(beerB);
         frame.remove(wineB);
         frame.remove(liquorB);
         frame.remove(countA);
         frame.remove(blank);
-        frame.remove(timerArea);
+        frame.remove(beerB);
+        frame.remove(wineB);
+        frame.remove(liquorB);
+        frame.remove(countA);
+        frame.remove(blank);
+        
         frame.setLayout(new GridLayout(5, 1));
         frame.add(nameT);
         frame.add(genderT);
@@ -169,14 +233,13 @@ public class GUI {
         frame.remove(weightT);
         frame.remove(heightT);
         frame.remove(sendData);
-        frame.remove(countA);
+        
         frame.remove(timerArea);
         frame.setLayout(new GridLayout(2, 3));
         frame.add(beerB);
         frame.add(wineB);
         frame.add(liquorB);
         frame.add(blank);
-        
         frame.add(countA);
         
         
@@ -186,17 +249,24 @@ public class GUI {
         frame.setVisible(true);
     }
     public static void setTimerScreen() {
-        frame.setLayout(new GridLayout(1, 1));
+        
         frame.remove(nameT);
         frame.remove(genderT);
         frame.remove(weightT);
         frame.remove(heightT);
         frame.remove(sendData);
+
         frame.remove(beerB);
         frame.remove(wineB);
         frame.remove(liquorB);
         frame.remove(countA);
         frame.remove(blank);
+        frame.remove(beerB);
+        frame.remove(wineB);
+        frame.remove(liquorB);
+        frame.remove(countA);
+        frame.remove(blank);
+
         frame.setLayout(new GridLayout(1, 1));
         frame.add(timerArea);
         frame.revalidate();
