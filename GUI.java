@@ -35,8 +35,8 @@ public class GUI {
         nameT = new JTextArea("Insert Name");
         nameT.setEditable(true);
         nameT.setText("Insert Name");
-        heightT = new JTextArea("Insert Height");
-        weightT = new JTextArea("Insert Weight");
+        heightT = new JTextArea("Insert Height (cm)");
+        weightT = new JTextArea("Insert Weight (lbs)");
         String[] genders = { "Male", "Female" };
         genderT = new JComboBox<String>(genders);
         sendData = new JButton("Send Data");
@@ -53,7 +53,7 @@ public class GUI {
         wineB.setFont(f);
         liquorB.setFont(f);
         blank = new JButton();
-        countA = new JTextArea("Add drink count here");
+        countA = new JTextArea("Add drink count here (Oz)");
         countA.setFont(f);
 
         menuBar = new JMenuBar();
@@ -225,6 +225,9 @@ public class GUI {
         frame.revalidate();
         frame.setEnabled(true);
         frame.setVisible(true);
+        frame.revalidate();
+        frame.setEnabled(true);
+        frame.setVisible(true);
     }
     public static void setDrinkScreen() {
         frame.setLayout(new GridLayout(3, 2));
@@ -244,6 +247,12 @@ public class GUI {
         
         
 
+        frame.revalidate();
+        frame.setEnabled(true);
+        frame.setVisible(true);
+        frame.revalidate();
+        frame.setEnabled(true);
+        frame.setVisible(true);
         frame.revalidate();
         frame.setEnabled(true);
         frame.setVisible(true);
@@ -269,6 +278,9 @@ public class GUI {
 
         frame.setLayout(new GridLayout(1, 1));
         frame.add(timerArea);
+        frame.revalidate();
+        frame.setEnabled(true);
+        frame.setVisible(true);
         frame.revalidate();
         frame.setEnabled(true);
         frame.setVisible(true);
