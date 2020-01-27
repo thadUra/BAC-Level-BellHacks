@@ -26,8 +26,8 @@ public class Timer {
         double height = a.getHeight() * .01;
        
         //Calculate alcohol distribution based on male or female (these are constants)
-        double malVolDist = 1.0178 - ((.012127 * weight) / (Math. pow(height, 2)));
-        double femVolDist = .8736 - ((.012127 * weight) / (Math. pow(height, 2)));
+        double malVolDist = 1.0178 - ((.012127 * weight) / (Math.pow(height, 2)));
+        double femVolDist = .8736 - ((.012127 * weight) / (Math.pow(height, 2)));
         if (a.getGender().toLowerCase().equals("male")) {
             bac += (gramsAlch / ((weight *1000) * malVolDist)) * 100;
         }
